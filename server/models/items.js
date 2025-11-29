@@ -16,3 +16,5 @@ const itemSchema = new Schema({
     default: Date.now,
   },
 });
+
+const item = mongoose.model("item", itemSchema);
