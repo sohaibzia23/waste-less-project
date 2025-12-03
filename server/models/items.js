@@ -3,7 +3,7 @@ const { Schema, model } = mongoose;
 
 const itemSchema = new Schema({
   title: String,
-  expiryDate: { type: Date, required: true },
+  expiryDate: { type: Date, required: true, default: Date.now },
   location: {
     type: String,
     required: true,
@@ -17,4 +17,6 @@ const itemSchema = new Schema({
   },
 });
 
-const item = mongoose.model("item", itemSchema);
+const Item = mongoose.model("item", itemSchema);
+
+export default Item;

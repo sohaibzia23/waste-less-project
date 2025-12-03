@@ -1,5 +1,9 @@
 import express from "express";
-import { homePage, getItems, addItem } from "./controllers/itemsController.js";
+import {
+  homePage,
+  getItems,
+  addItems,
+} from "../controllers/itemsController.js";
 
 const router = express.Router();
 
@@ -7,6 +11,10 @@ router.get("/", homePage);
 
 router.get("/getItems", getItems);
 
-router.post("/addItem/:title", addItem);
+router.use(getItems);
+
+router.post("/addItem", addItems);
+
+router.use(addItems);
 
 export default router;

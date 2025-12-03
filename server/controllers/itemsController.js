@@ -1,15 +1,35 @@
-import items from "./models/items.js";
+import Item from "../models/items.js";
 
 const homePage = async (req, res) => {
   res.send("homepage");
 };
 
 const getItems = async (req, res) => {
-  res.send("items");
+  try {
+    const items = await Item.find();
+    res.status(200).json(items);
+  } catch (err) {
+    res.status(500).json({ message: "error fetching items" });
+  }
 };
 
 const addItems = async (req, res) => {
-  res.send("item added");
+  try {
+    const item = new Item({
+      title: req.body.title,
+      expiryDate: req.body.expiryDate,
+      location: req.body.location,
+      quantity: req.body.quantity,
+      category: req.body.category,
+    });
+
+    await item.save();
+    console.log("item added");
+    console.log(req.body);
+    res.status(201).json(item);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
 
-export default { homePage, getItems, addItems };
+export { homePage, getItems, addItems };
