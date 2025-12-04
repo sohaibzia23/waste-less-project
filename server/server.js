@@ -19,6 +19,11 @@ mongoose
 
 app.use("/items", items);
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "something went wrong " });
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

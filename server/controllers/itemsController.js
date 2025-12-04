@@ -1,4 +1,4 @@
-import Item from "../models/items.js";
+import Item from "../models/itemModel.js";
 
 const homePage = async (req, res) => {
   res.send("homepage");
@@ -28,8 +28,17 @@ const addItems = async (req, res) => {
     console.log(req.body);
     res.status(201).json(item);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: "something went wrong" });
   }
 };
 
-export { homePage, getItems, addItems };
+const deleteItem = async (req, res) => {
+  try {
+    const item = new Item();
+    await item.deleteOne({ _id });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export { homePage, getItems, addItems, deleteItem };
