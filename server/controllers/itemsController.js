@@ -34,8 +34,9 @@ const addItems = async (req, res) => {
 
 const deleteItem = async (req, res) => {
   try {
-    const item = new Item();
-    await item.deleteOne({ _id });
+    const itemId = req.params.id;
+    await Item.findByIdAndDelete(itemId);
+    res.json("the item was deleted successfully");
   } catch (err) {
     console.error(err);
   }
