@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function ItemsPage() {
-  const [items, setItems] = useState({
+  const [item, setItem] = useState({
     title: "",
     expiryDate: "",
     location: "",
@@ -11,24 +11,27 @@ function ItemsPage() {
     dateAdded: "",
   });
 
-  let reqOne = axios.get("http://localhost:9000/items/getItems");
-  let reqTwo = axios.post("http://localhost:9000/items/addItem");
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     axios
-      .all([reqOne, reqTwo])
-      .then(
-        axios.spread((resOne, resTwo) => {
-          console.log(resOne.data);
-          console.log(resTwo.data);
-        })
-      )
-      .catch((errors) => {
-        console.error(errors);
+      .get("http://localhost:9000/items/getItems")
+      .then((response) => {
+        setItems(response.data);
+        // console.log(response);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
       });
-  });
+  }, []);
 
-  return <h1>items</h1>;
+  return (
+    <>
+      <header>items</header>
+      <button>Add item</button>
+    </>
+  );
 }
 
 export default ItemsPage;
