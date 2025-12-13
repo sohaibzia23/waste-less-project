@@ -12,8 +12,8 @@ function ItemsPage() {
   });
 
   const [isVisible, setIsVisible] = useState(false);
-
   const [items, setItems] = useState([]);
+  const [buttonVisible, setButtonVisible] = useState(true);
 
   useEffect(() => {
     axios
@@ -68,89 +68,100 @@ function ItemsPage() {
       });
   };
 
-  const itemList = items.map((item) => (
-    <>
-      {/* <ul>
-        <li key={item.id}>
-          {item.title + " "}
-
-          {item.expiryDate.slice(0, -14) + " "}
-          {item.location + " "}
-          {item.quantity + " "}
-          {item.category + " "}
-        </li>
-      </ul> */}
-
-      <table bgcolor="black" style={{ width: "100%" }}>
-        <tr bgcolor="grey" style={{ width: "100%" }}>
-          <th>Title</th>
-          <th>Expiry Date</th>
-          <th>Location</th>
-          <th>Quantity</th>
-          <th>Category</th>
-        </tr>
-        <tr bgcolor="lightgrey" key={item.id}>
-          <td>{item.title}</td>
-          <td>{item.expiryDate.slice(0, -14)}</td>
-          <td>{item.location}</td>
-          <td>{item.quantity}</td>
-          <td>{item.category}</td>
-        </tr>
-      </table>
-    </>
-  ));
+  const ItemList = () => {
+    const items = items.map((item) => (
+      <div key={item.id}>
+        <table bgcolor="black" width="800">
+          <thead>
+            <tr bgcolor="grey" width="800">
+              <th width="200">Title</th>
+              <th width="200">Expiry Date</th>
+              <th width="200">Location</th>
+              <th width="200">Quantity</th>
+              <th width="200">Category</th>
+            </tr>
+          </thead>
+          <thead>
+            <tr bgcolor="lightgrey">
+              <td width="200">{item.title}</td>
+              <td width="200">{item.expiryDate.slice(0, -14)}</td>
+              <td width="200">{item.location}</td>
+              <td width="200">{item.quantity}</td>
+              <td width="200">{item.category}</td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    ));
+  };
 
   const showForm = () => {
     setIsVisible(!isVisible);
   };
 
+  const showButton = () => {
+    setButtonVisible(false);
+  };
+
   return (
     <>
+      <ItemList />
       <title>Items</title>
-      <button style={{ float: "right" }} onClick={addItemButton} isVisible>
-        Add Item
-      </button>
-      <form onSubmit={handleSubmit}>
-        <input
-          name="title"
-          placeholder="Title"
-          value={item.title}
-          onChange={handleChange}
-        ></input>
-        <br></br>
-        <input
-          name="expiryDate"
-          placeholder="Expiration date"
-          value={item.expiryDate}
-          onChange={handleChange}
-        ></input>
-        <br></br>
-        <input
-          name="location"
-          placeholder="Location"
-          value={item.location}
-          onChange={handleChange}
-        ></input>
-        <br></br>
-        <input
-          name="quantity"
-          placeholder="Quantity"
-          value={item.quantity}
-          onChange={handleChange}
-        ></input>
-        <br></br>
-        <input
-          name="category"
-          placeholder="Category"
-          value={item.category}
-          onChange={handleChange}
-        ></input>
 
-        <br></br>
+      {buttonVisible ? (
+        <button
+          style={{ float: "right" }}
+          onClick={() => {
+            showForm();
+            showButton();
+          }}
+        >
+          Add Item
+        </button>
+      ) : null}
 
-        <button type="submit">Add item</button>
-      </form>
-      ;<div>{itemList}</div>
+      {isVisible && (
+        <form onSubmit={handleSubmit}>
+          <input
+            name="title"
+            placeholder="Title"
+            value={item.title}
+            onChange={handleChange}
+          ></input>
+          <br></br>
+          <input
+            name="expiryDate"
+            placeholder="Expiration date"
+            value={item.expiryDate}
+            onChange={handleChange}
+          ></input>
+          <br></br>
+          <input
+            name="location"
+            placeholder="Location"
+            value={item.location}
+            onChange={handleChange}
+          ></input>
+          <br></br>
+          <input
+            name="quantity"
+            placeholder="Quantity"
+            value={item.quantity}
+            onChange={handleChange}
+          ></input>
+          <br></br>
+          <input
+            name="category"
+            placeholder="Category"
+            value={item.category}
+            onChange={handleChange}
+          ></input>
+
+          <br></br>
+
+          <button type="submit">Add</button>
+        </form>
+      )}
     </>
   );
 }
