@@ -53,23 +53,18 @@ function ItemsPage() {
       });
   };
 
-  const handleDelete = (itemId) => {
-    const url = `http://localhost:9000/items/deleteItem/${item.id}`;
-
-    axios
-      .delete(url)
-      .then((res) => {
-        this.setItems((prevData) => {
-          items: prevData.items.filter((i) => i.id != item.id);
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:9000/items/deleteItem/${item.id}`);
+      setItems((prev) => prev.filter((i) => i.id != item.id));
+    } catch (error) {
+      console.log(error);
+      console.log("An error has occurred");
+    }
   };
 
   const ItemList = () => {
-    const items = items.map((item) => (
+    return items.map((item) => (
       <div key={item.id}>
         <table bgcolor="black" width="800">
           <thead>
@@ -79,6 +74,9 @@ function ItemsPage() {
               <th width="200">Location</th>
               <th width="200">Quantity</th>
               <th width="200">Category</th>
+              <th>
+                <button onClick={(e) => handleDelete(e)}>Delete item</button>
+              </th>
             </tr>
           </thead>
           <thead>
@@ -105,9 +103,9 @@ function ItemsPage() {
 
   return (
     <>
-      <ItemList />
       <title>Items</title>
-
+      <header>Items</header>
+      <ItemList></ItemList>
       {buttonVisible ? (
         <button
           style={{ float: "right" }}
