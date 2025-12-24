@@ -14,6 +14,7 @@ function ItemsPage() {
   const [isVisible, setIsVisible] = useState(false);
   const [items, setItems] = useState([]);
   const [buttonVisible, setButtonVisible] = useState(true);
+  const [showTable, setShowTable] = useState(true);
 
   useEffect(() => {
     axios
@@ -53,19 +54,23 @@ function ItemsPage() {
       });
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:9000/items/deleteItem/${item.id}`);
-      setItems((prev) => prev.filter((i) => i.id != item.id));
-    } catch (error) {
-      console.log(error);
-      console.log("An error has occurred");
-    }
+  const handleDelete = (_id) => {
+    const newTable = items.filter((item) => item._id !== _id);
+    axios
+      .delete(`http://localhost:9000/items/deleteItem/${_id}`)
+      .then((response) => {
+        setItems(newTable);
+
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const ItemList = () => {
     return items.map((item) => (
-      <div key={item.id}>
+      <div key={item._id}>
         <table bgcolor="black" width="800">
           <thead>
             <tr bgcolor="grey" width="800">
@@ -75,7 +80,9 @@ function ItemsPage() {
               <th width="200">Quantity</th>
               <th width="200">Category</th>
               <th>
-                <button onClick={(e) => handleDelete(e)}>Delete item</button>
+                <button onClick={(e) => handleDelete(item._id)}>
+                  Delete item
+                </button>
               </th>
             </tr>
           </thead>
@@ -101,17 +108,23 @@ function ItemsPage() {
     setButtonVisible(false);
   };
 
+  const hideTable = () => {
+    setShowTable(false);
+  };
+
   return (
     <>
       <title>Items</title>
       <header>Items</header>
-      <ItemList></ItemList>
+
+      {showTable && <ItemList></ItemList>}
       {buttonVisible ? (
         <button
           style={{ float: "right" }}
           onClick={() => {
             showForm();
             showButton();
+            hideTable();
           }}
         >
           Add Item

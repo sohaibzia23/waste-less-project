@@ -19,4 +19,6 @@ const itemSchema = new Schema({
 
 const Item = mongoose.model("item", itemSchema);
 
+Item.aggregate([{}]);
+
 export default Item;
