@@ -69,35 +69,38 @@ function ItemsPage() {
   };
 
   const ItemList = () => {
-    return items.map((item) => (
-      <div key={item._id}>
-        <table bgcolor="black" width="800">
-          <thead>
-            <tr bgcolor="grey" width="800">
-              <th width="200">Title</th>
-              <th width="200">Expiry Date</th>
-              <th width="200">Location</th>
-              <th width="200">Quantity</th>
-              <th width="200">Category</th>
-              <th>
-                <button onClick={(e) => handleDelete(item._id)}>
-                  Delete item
-                </button>
-              </th>
-            </tr>
-          </thead>
-          <thead>
-            <tr bgcolor="lightgrey">
+    return (
+      <table bgcolor="black" width="800">
+        <thead>
+          <tr bgcolor="grey" width="800">
+            <th width="200">Title</th>
+            <th width="200">Expiry Date</th>
+            <th width="200">Location</th>
+            <th width="200">Quantity</th>
+            <th width="200">Category</th>
+            <th width="200">Days until Expiration</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item) => (
+            <tr bgcolor="lightgrey" key={item._id}>
               <td width="200">{item.title}</td>
               <td width="200">{item.expiryDate.slice(0, -14)}</td>
               <td width="200">{item.location}</td>
               <td width="200">{item.quantity}</td>
               <td width="200">{item.category}</td>
+              <td width="200">{item.dateDifference + ` days`}</td>
+              <td>
+                <button onClick={(e) => handleDelete(item._id)}>
+                  Delete Item
+                </button>
+              </td>
             </tr>
-          </thead>
-        </table>
-      </div>
-    ));
+          ))}
+        </tbody>
+      </table>
+    );
   };
 
   const showForm = () => {
@@ -117,7 +120,7 @@ function ItemsPage() {
       <title>Items</title>
       <header>Items</header>
 
-      {showTable && <ItemList></ItemList>}
+      {showTable && <ItemList />}
       {buttonVisible ? (
         <button
           style={{ float: "right" }}
@@ -167,6 +170,7 @@ function ItemsPage() {
             value={item.category}
             onChange={handleChange}
           ></input>
+          <br></br>
 
           <br></br>
 

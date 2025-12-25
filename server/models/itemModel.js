@@ -19,6 +19,6 @@ const itemSchema = new Schema({
 
 const Item = mongoose.model("item", itemSchema);
 
-Item.aggregate([{}]);
+// console.log(dateDifference);
 
 export default Item;

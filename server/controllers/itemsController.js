@@ -6,7 +6,19 @@ const homePage = async (req, res) => {
 
 const getItems = async (req, res) => {
   try {
-    const items = await Item.find();
+    const items = await Item.aggregate([
+      {
+        $addFields: {
+          dateDifference: {
+            $dateDiff: {
+              startDate: "$$NOW",
+              endDate: "$expiryDate",
+              unit: "day",
+            },
+          },
+        },
+      },
+    ]);
     res.status(200).json(items);
   } catch (err) {
     res.status(500).json({ message: "error fetching items" });
