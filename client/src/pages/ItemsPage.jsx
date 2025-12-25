@@ -92,7 +92,10 @@ function ItemsPage() {
               <td width="200">{item.category}</td>
               <td width="200">{item.dateDifference + ` days`}</td>
               <td>
-                <button onClick={(e) => handleDelete(item._id)}>
+                <button
+                  className="dark:lg:data-current:hover:bg-indigo-600"
+                  onClick={(e) => handleDelete(item._id)}
+                >
                   Delete Item
                 </button>
               </td>
@@ -137,6 +140,7 @@ function ItemsPage() {
       {isVisible && (
         <form onSubmit={handleSubmit}>
           <input
+            className="border-2 border-solid"
             name="title"
             placeholder="Title"
             value={item.title}
@@ -144,6 +148,7 @@ function ItemsPage() {
           ></input>
           <br></br>
           <input
+            className="border-2 border-solid"
             name="expiryDate"
             placeholder="Expiration date"
             value={item.expiryDate}
@@ -151,6 +156,7 @@ function ItemsPage() {
           ></input>
           <br></br>
           <input
+            className="border-2 border-solid"
             name="location"
             placeholder="Location"
             value={item.location}
@@ -158,6 +164,7 @@ function ItemsPage() {
           ></input>
           <br></br>
           <input
+            className="border-2 border-solid"
             name="quantity"
             placeholder="Quantity"
             value={item.quantity}
@@ -165,6 +172,7 @@ function ItemsPage() {
           ></input>
           <br></br>
           <input
+            className="border-2 border-solid"
             name="category"
             placeholder="Category"
             value={item.category}
@@ -174,7 +182,12 @@ function ItemsPage() {
 
           <br></br>
 
-          <button type="submit">Add</button>
+          <button
+            className="bg-grey-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full"
+            type="submit"
+          >
+            Add
+          </button>
         </form>
       )}
     </>
