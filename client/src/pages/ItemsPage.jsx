@@ -70,30 +70,65 @@ function ItemsPage() {
 
   const ItemList = () => {
     return (
-      <table bgcolor="black" width="800">
+      <table className="bg-oklch(97% 0 0)" width="800">
         <thead>
           <tr bgcolor="grey" width="800">
-            <th width="200">Title</th>
-            <th width="200">Expiry Date</th>
-            <th width="200">Location</th>
-            <th width="200">Quantity</th>
-            <th width="200">Category</th>
-            <th width="200">Days until Expiration</th>
+            <th className="font-BBHBogle" width="200">
+              Title
+            </th>
+            <th className="font-BBHBogle" width="200">
+              Expiry Date
+            </th>
+            <th className="font-BBHBogle" width="200">
+              Location
+            </th>
+            <th className="font-BBHBogle" width="200">
+              Quantity
+            </th>
+            <th className="font-BBHBogle" width="200">
+              Category
+            </th>
+            <th className="font-BBHBogle" width="200">
+              Days until Expiration
+            </th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           {items.map((item) => (
             <tr bgcolor="lightgrey" key={item._id}>
-              <td width="200">{item.title}</td>
-              <td width="200">{item.expiryDate.slice(0, -14)}</td>
-              <td width="200">{item.location}</td>
-              <td width="200">{item.quantity}</td>
-              <td width="200">{item.category}</td>
-              <td width="200">{item.dateDifference + ` days`}</td>
+              <td
+                className={`${
+                  item.dateDifference <= 2
+                    ? "bg-red-500"
+                    : item.dateDifference <= 7
+                    ? "bg-yellow-300"
+                    : item.dateDifference > 7
+                    ? "bg-green-300"
+                    : {}
+                } font-Cabin`}
+                width="200"
+              >
+                {item.title}
+              </td>
+              <td className="font-Cabin" width="200">
+                {item.expiryDate.slice(0, -14)}
+              </td>
+              <td className="font-Cabin" width="200">
+                {item.location}
+              </td>
+              <td className="font-Cabin" width="200">
+                {item.quantity}
+              </td>
+              <td className="font-Cabin" width="200">
+                {item.category}
+              </td>
+              <td className="font-Cabin" width="200">
+                {item.dateDifference + ` days`}
+              </td>
               <td>
                 <button
-                  className="dark:lg:data-current:hover:bg-indigo-600"
+                  className="font-BBHBogle py-2 px-4 rounded-2xl text-black bg-white hover:bg-red-800!"
                   onClick={(e) => handleDelete(item._id)}
                 >
                   Delete Item
@@ -120,12 +155,14 @@ function ItemsPage() {
 
   return (
     <>
-      <title>Items</title>
-      <header>Items</header>
+      <header className="font-BBHBogle text-8xl fixed top-10 left-0 right-0 z-50 p-1 text-cyan-800">
+        WasteLess
+      </header>
 
       {showTable && <ItemList />}
       {buttonVisible ? (
         <button
+          className="font-BBHBogle py-2 px-4 rounded-2xl"
           style={{ float: "right" }}
           onClick={() => {
             showForm();
@@ -185,6 +222,7 @@ function ItemsPage() {
           <button
             className="bg-grey-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full"
             type="submit"
+            // onClick={handleSubmit}
           >
             Add
           </button>

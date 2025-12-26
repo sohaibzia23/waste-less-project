@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=BBH+Bogle&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=BBH+Bogle&family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -37,7 +39,7 @@ h1 {
   line-height: 1.1;
 }
 
-button {
+/* button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -54,7 +56,7 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
+} */
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -79,4 +81,17 @@ button:focus-visible {
 
 .yellow {
   color: yellow;
+}
+
+@theme {
+  --font-roboto: "Roboto", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-BBHBogle: "BBH Bogle", sans-serif;
+  --font-Cabin: "Cabin", sans-serif;
+}
+
+@layer base {
+  html {
+    @apply min-h-screen bg-linear-to-b from-gray-100 to-gray-300;
+  }
 }
