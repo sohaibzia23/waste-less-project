@@ -70,25 +70,46 @@ function ItemsPage() {
 
   const ItemList = () => {
     return (
-      <table className="bg-oklch(97% 0 0)" width="800">
+      <table className="bg-oklch(97% 0 0) table-auto" width="800">
+        <caption className="font-BBHBogle caption-top text-4xl text-left">
+          Items
+        </caption>
         <thead>
-          <tr bgcolor="grey" width="800">
-            <th className="font-BBHBogle" width="200">
+          <tr className="bg-gray-700" width="800">
+            <th
+              className="font-BBHBogle text-2xl bg-gray-700 text-gray-300"
+              width="200"
+            >
               Title
             </th>
-            <th className="font-BBHBogle" width="200">
+            <th
+              className="font-BBHBogle text-2xl bg-gray-700 text-gray-300"
+              width="200"
+            >
               Expiry Date
             </th>
-            <th className="font-BBHBogle" width="200">
+            <th
+              className="font-BBHBogle text-2xl bg-gray-700 text-gray-300"
+              width="200"
+            >
               Location
             </th>
-            <th className="font-BBHBogle" width="200">
+            <th
+              className="font-BBHBogle text-2xl bg-gray-700 text-gray-300"
+              width="200"
+            >
               Quantity
             </th>
-            <th className="font-BBHBogle" width="200">
+            <th
+              className="font-BBHBogle text-2xl bg-gray-700 text-gray-300"
+              width="200"
+            >
               Category
             </th>
-            <th className="font-BBHBogle" width="200">
+            <th
+              className="font-BBHBogle text-2xl bg-gray-700 text-gray-300"
+              width="200"
+            >
               Days until Expiration
             </th>
             <th></th>
@@ -100,9 +121,9 @@ function ItemsPage() {
               <td
                 className={`${
                   item.dateDifference <= 2
-                    ? "bg-red-500"
+                    ? "bg-red-400"
                     : item.dateDifference <= 7
-                    ? "bg-yellow-300"
+                    ? "bg-yellow-200"
                     : item.dateDifference > 7
                     ? "bg-green-300"
                     : {}
@@ -128,10 +149,10 @@ function ItemsPage() {
               </td>
               <td>
                 <button
-                  className="font-BBHBogle py-2 px-4 rounded-2xl text-black bg-white hover:bg-red-800!"
+                  className="font-BBHBogle py-2 px-4 rounded-2xl text-black bg-white hover:bg-red-600!"
                   onClick={(e) => handleDelete(item._id)}
                 >
-                  Delete Item
+                  🗑️
                 </button>
               </td>
             </tr>
@@ -162,7 +183,7 @@ function ItemsPage() {
       {showTable && <ItemList />}
       {buttonVisible ? (
         <button
-          className="font-BBHBogle py-2 px-4 rounded-2xl"
+          className="font-BBHBogle py-2 px-4 rounded-2xl text-black bg-white hover:bg-green-200!"
           style={{ float: "right" }}
           onClick={() => {
             showForm();
@@ -170,7 +191,7 @@ function ItemsPage() {
             hideTable();
           }}
         >
-          Add Item
+          ➕
         </button>
       ) : null}
 
