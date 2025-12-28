@@ -71,7 +71,7 @@ function ItemsPage() {
   const ItemList = () => {
     return (
       <table className="bg-oklch(97% 0 0) table-auto" width="800">
-        <caption className="font-BBHBogle caption-top text-4xl text-left">
+        <caption className="flex-auto font-BBHBogle caption-top text-4xl text-left">
           Items
         </caption>
         <thead>
@@ -149,7 +149,7 @@ function ItemsPage() {
               </td>
               <td>
                 <button
-                  className="font-BBHBogle py-2 px-4 rounded-2xl text-black bg-white hover:bg-red-600!"
+                  className="font-BBHBogle py-2 px-4 rounded-2xl text-black bg-white transition delay-15 duration-300 ease-in-out hover:bg-red-600! hover:-translate-y-1"
                   onClick={(e) => handleDelete(item._id)}
                 >
                   🗑️
@@ -159,6 +159,18 @@ function ItemsPage() {
           ))}
         </tbody>
       </table>
+    );
+  };
+
+  const ItemPage = () => {
+    return (
+      <div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     );
   };
 
@@ -183,7 +195,7 @@ function ItemsPage() {
       {showTable && <ItemList />}
       {buttonVisible ? (
         <button
-          className="font-BBHBogle py-2 px-4 rounded-2xl text-black bg-white hover:bg-green-200!"
+          className="font-BBHBogle py-2 px-4 rounded-2xl text-black bg-white transition delay-15 duration-300 ease-in-out hover:bg-green-200! hover:-translate-y-1"
           style={{ float: "right" }}
           onClick={() => {
             showForm();

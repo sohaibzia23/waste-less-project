@@ -88,6 +88,10 @@ button:focus-visible {
   --font-inter: "Inter", sans-serif;
   --font-BBHBogle: "BBH Bogle", sans-serif;
   --font-Cabin: "Cabin", sans-serif;
+  container: {
+    center: true,
+    padding: "2rem"
+  }
 }
 
 @layer base {
